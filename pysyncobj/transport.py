@@ -267,7 +267,7 @@ class TCPTransport(Transport):
             host, port = bindAddr.rsplit(':', 1)
         elif seflAddr is not None:
             host, port = seflAddr.rsplit(':', 1)
-            host = '0.0.0.0'
+            # host = '0.0.0.0'
         else:
             raise RuntimeError('Unable to determine bind address')
         

@@ -196,6 +196,7 @@ class SyncObj(object):
             self.__transport = transport
         else:
             self.__transport = transportClass(self, self.__selfNode, self.__otherNodes)
+            logging.info("__transport ==> " + str(self.__transport))
         self.__transport.setOnNodeConnectedCallback(self.__onNodeConnected)
         self.__transport.setOnNodeDisconnectedCallback(self.__onNodeDisconnected)
         self.__transport.setOnMessageReceivedCallback(self.__onMessageReceived)
