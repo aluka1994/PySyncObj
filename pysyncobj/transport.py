@@ -8,7 +8,9 @@ import functools
 import os
 import threading
 import time
+import logging
 
+logging.basicConfig(filename="transport.log",level=logging.DEBUG)
 
 class TransportNotReadyError(Exception):
     """Transport failed to get ready for operation."""
@@ -271,10 +273,14 @@ class TCPTransport(Transport):
         
         if host != '0.0.0.0':
             host = globalDnsResolver().resolve(host)
+
+        logging.info("Server Host from dns: " + str(host))
         self._server = TcpServer(self._syncObj._poller, host, port, onNewConnection = self._onNewIncomingConnection,
                                  sendBufferSize = conf.sendBufferSize,
                                  recvBufferSize = conf.recvBufferSize,
                                  connectionTimeout = conf.connectionTimeout)
+        
+        logging.info("Self __server : " + str(self._server))
 
     def _maybeBind(self):
         """
