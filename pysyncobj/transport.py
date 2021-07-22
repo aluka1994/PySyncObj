@@ -294,13 +294,16 @@ class TCPTransport(Transport):
         self._lastBindAttemptTime = monotonicTime()
         try:
             self._server.bind()
+            logging.info("Self __server_bind : " + str(self._server.__state))
         except Exception as e:
             self._bindAttempts += 1
+            logging.info("Self __server_bindattempts : " + str(self._bindAttempts))
             if self._syncObj.conf.maxBindRetries and self._bindAttempts >= self._syncObj.conf.maxBindRetries:
                 self._bindOverEvent.set()
                 raise TransportNotReadyError
         else:
             self._ready = True
+            logging.info("Self __server_ready : " + str(self._ready))
             self._bindOverEvent.set()
 
     def _onTick(self):

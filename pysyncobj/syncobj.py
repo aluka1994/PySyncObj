@@ -431,8 +431,9 @@ class SyncObj(object):
 
     def _checkCommandsToApply(self):
         startTime = monotonicTime()
-
+        logging.info("Self startTime : " + str(self.startTime))
         while monotonicTime() - startTime < self.__conf.appendEntriesPeriod:
+            logging.info("Self startTime : " + str(monotonicTime()) + " : " + str(self.__conf.appendEntriesPeriod))
             if self.__raftLeader is None and self.__conf.commandsWaitLeader:
                 break
             try:
