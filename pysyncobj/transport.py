@@ -265,6 +265,7 @@ class TCPTransport(Transport):
         seflAddr = getattr(self._selfNode, 'address')
         if bindAddr is not None:
             host, port = bindAddr.rsplit(':', 1)
+            logging.info(" bind address : " + str(host) + " : " + str(port))
         elif seflAddr is not None:
             host, port = seflAddr.rsplit(':', 1)
             # host = '0.0.0.0'
